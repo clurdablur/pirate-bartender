@@ -1,3 +1,27 @@
+$(document).ready(function() {
+	$('#submitButton').click(function() {
+
+		
+
+
+		Bartender.prototype.makeDrink = function(selectArray) {
+			for (i = 0; i < selectArray.length; i++) {
+				var select = $(selectArray[i]);
+				if (select.val() === 'yes') {
+					var name = select.attr('name');
+					var randomValue = getRandom();
+					var ingredientArray = [];
+					ingredientArray.push(ingredients[name][randomValue]);
+
+					var html = '<h3>'+ingredientArray+'</h3>'
+					$('#ingredient-results').append(html);
+				}
+			}
+		}
+
+		
+
+	})
 
 var questions = {'strong': 'Do ye like your drinks strong?',
 'salty': 'do ye like it with a salty tang?',
@@ -25,30 +49,22 @@ var Bartender = function() {
 	}
 }
 
-Bartender.prototype.makeDrink = function(selectArray) {
-	for (i = 0; i < selectArray.length; i++) {
-		var select = $(selectArray[i]);
-		if (select.val() === 'yes') {
-			var name = select.attr('name');
-			var randomValue = getRandom();
-			console.log(ingredients[name][randomValue]);
-			console.log(name);
-		}
-	}
-}
+
+
+
 
 var myBartender = new Bartender();
 var test = new Bartender();
-console.log(test);
-console.log(myBartender);
+
 
 function getRandom(){
 	return Math.floor(Math.random() * (2 - 0 + 1) + 0);
 }
-console.log(getRandom());
 
 $('#typesubmit').submit(function(event){
 	event.preventDefault();
 	myBartender.makeDrink($('select'));
 }) 
+})
+
 
